@@ -17,7 +17,7 @@ else:
 os.system(clearcommand)
 
 if len(sys.argv) != 3:
-    print "Usage: python PortScanner.py <targetIP> <scantype>"
+    print "Usage: PortScanner.py <targetIP> <scantype>"
     sys.exit(1)
 
 #Getting the arguments
@@ -27,5 +27,14 @@ targetIP= socket.gethostbyname(ipAddr)
 
 if scantype == 'common' or scantype=='Common':
     print "About to perform a common scan on: " + ipAddr
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    
+    for key in common_dict:
+        print  "scanning port", common_dict[key]
+        port = common_dict[key]
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        result = sock.connect((targetIP, port))
+        #if result == 0:
+         #   print common_dict[port]
+        sock.close()
+
+
+
